@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body{
+            background-color: black;
+            color: white;
+        }
+        h1,h2,h3{text-align: center;
+                font-family: sans-serif;        
+            }
+        h1{
+            font-size: 40px;
+        }
+        h2{
+            margin-bottom: 50px;
+        }
+        button{
+            width: 16%;
+            height: 80%;
+            cursor: pointer;
+            border-radius: 50%;
+            background-color: black;
+            border: white 2px solid;
+        }
+        
+
+        .options{
+            width: 100%;
+            height: 40vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .options img{
+            width: 50%;
+        }
+        .js-statu{
+            font-size: 25px;
+        }
+        .js-move img{
+            width: 4%;
+            margin-right:10px;
+            margin-left: 10px;
+        }
+        .lightmode{
+            background-color: white;
+            color: black;
+        }
+        .mode,.swp{
+            color: white;
+            border-radius: 10px;
+            padding: 15px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body id="bod">
+    <h1>Rock Paper Scissors</h1>
+    <h2>please select a choice</h2>
+    <h3 class="js-statu"></h3>
+    <h3 class="js-move">You <img src="imgs/paper-emoji.png"><img src="imgs/rock-emoji.png"> Computer</h3>
+    <div class="options">
+        <button onclick="
+        playGame('Rock')
+        
+            
+        " 
+        ><img src="imgs/rock-emoji.png" alt="" ></button>
+
+        
+        <button onclick="
+            playGame('Paper')
+            
+        "><img src="imgs/paper-emoji.png" alt=""></button>
+
+        <button onclick="
+            playGame('Scissors')
+        "><img src="imgs/scissors-emoji.png" alt=""></button>
+    </div>
+   
+
+    <h2 class="js-score"></h2>
+
+    <button style="background-color: rgba(255, 0, 0, 0.676);color: white; height: 30px; border-radius: 10px;" onclick="
+    score.wins=0;
+    score.loses = 0;
+    score.ties = 0;
+    alert('the score have been reset ')
+    updateScore()
+
+    
+    ">Reset score</button>
+
+    <button class="mode" onclick="
+        lightmode() 
+    ">Light mode</button>
+    <button  class="mode" onclick="
+        darkmode()
+    ">Dark mode</button>
+
+    <button class="swp" onclick="swap()">dark-mode</button>
+
+    
+    <script>
+        console.log(document.querySelector('.mode').innerHTML)
+
+        function lightmode(){
+            document.querySelector('body').classList.add('lightmode')
+        }
+        function darkmode(){
+            document.querySelector('body').classList.remove('lightmode')
+        }
+
+        function swap(){
+            let inside = document.querySelector('.swp').innerHTML
+            if (inside === 'dark-mode'){
+                document.querySelector('body').classList.add('lightmode')
+                document.querySelector('.swp').innerHTML='light-mode'
+            }
+            else if (inside === 'light-mode'){
+                document.querySelector('body').classList.remove('lightmode')
+                document.querySelector('.swp').innerHTML='dark-mode'
+            }
+        }
+        const score = {
+            wins : 0 ,
+            loses : 0 ,
+            ties : 0
+        };
+        document.querySelector('.js-statu').innerHTML = "Result";
+
+        document.querySelector('.js-move').innerHTML = "Your Move Vs Computer Move";
+
+        function updateScore(){
+            document.querySelector('.js-score').innerHTML= `Wins : ${score.wins}  ,  loses : ${score.loses}  ,  Ties : ${score.ties}`
+        }
+        
+        updateScore()
+        function playGame(userchoice){
+            pickPcMove()
+            let results = ''
+
+            if (userchoice === 'Scissors'){
+                if (PcMove === 'Rock'){
+                    results = 'You Lose';
+                    document.querySelector('.js-statu').innerHTML = results;
+
+                }else if(PcMove === 'Paper'){
+                    results = 'You Win';
+                    document.querySelector('.js-statu').innerHTML = results;
+
+                }else if (PcMove  === 'Scissors'){
+                    results = 'Tie';
+                    document.querySelector('.js-statu').innerHTML = results
+                }
+            }
+
+            else if (userchoice === 'Paper'){
+                if (PcMove === 'Rock'){
+                results = 'You Win';
+                document.querySelector('.js-statu').innerHTML = results
+                }else if(PcMove === 'Paper'){
+                    results = 'Tie';
+                    document.querySelector('.js-statu').innerHTML = results
+                }else if (PcMove  === 'Scissors'){
+                    results = 'You Lose';
+                    document.querySelector('.js-statu').innerHTML = results
+                }
+            }
+             
+            else if (userchoice === 'Rock'){
+                if (PcMove === 'Rock'){
+                results = 'Tie';
+                document.querySelector('.js-statu').innerHTML = results
+                }else if(PcMove === 'Paper'){
+                results = 'You Lose';
+                document.querySelector('.js-statu').innerHTML = results
+                }else if (PcMove  === 'Scissors'){
+                results = 'You Win';
+                document.querySelector('.js-statu').innerHTML = results
+                }
+            }
+
+            if (results === 'You Win'){
+                score.wins+=1
+                updateScore()
+            }
+            else if (results === 'You Lose'){ 
+                score.loses+=1
+                updateScore()
+            }
+            else if (results === 'Tie'){
+                score.ties+=1
+                updateScore()
+
+            }
+            /*
+            alert(`you pick ${userchoice} ,  and the Computer picked  :  ${PcMove}  .  ${results}
+            Wins : ${score.wins}  ,  loses : ${score.loses}  ,  Ties : ${score.ties}`)
+            */
+            document.querySelector('.js-move').innerHTML = ` You <img src="imgs/${userchoice}-emoji.png"><img src="imgs/${PcMove}-emoji.png"> Computer`;
+
+            }
+
+        let PcMove = '';
+        function pickPcMove(){
+            const RandomChoice = Math.random();
+            if (RandomChoice>=0 && RandomChoice< 1/3){
+            PcMove ='Rock';
+            }else if (RandomChoice >= 1/3 && RandomChoice < 2/3){
+            PcMove = 'Paper';  
+            }else if (RandomChoice >= 2/3 && RandomChoice < 1){
+            PcMove = 'Scissors';
+            }
+            console.log(PcMove)
+
+
+        }
+
+    </script>
+</body>
+</html>
