@@ -62,24 +62,24 @@
     <h1>Rock Paper Scissors</h1>
     <h2>please select a choice</h2>
     <h3 class="js-statu"></h3>
-    <h3 class="js-move">You <img src="imgs/paper-emoji.png"><img src="imgs/rock-emoji.png"> Computer</h3>
+    <h3 class="js-move">You <img src="paper-emoji.png"><img src="rock-emoji.png"> Computer</h3>
     <div class="options">
         <button onclick="
         playGame('Rock')
         
             
         " 
-        ><img src="imgs/rock-emoji.png" alt="" ></button>
+        ><img src="rock-emoji.png" alt="" ></button>
 
         
         <button onclick="
             playGame('Paper')
             
-        "><img src="imgs/paper-emoji.png" alt=""></button>
+        "><img src="paper-emoji.png" alt=""></button>
 
         <button onclick="
             playGame('Scissors')
-        "><img src="imgs/scissors-emoji.png" alt=""></button>
+        "><img src="scissors-emoji.png" alt=""></button>
     </div>
    
 
@@ -202,7 +202,7 @@
             alert(`you pick ${userchoice} ,  and the Computer picked  :  ${PcMove}  .  ${results}
             Wins : ${score.wins}  ,  loses : ${score.loses}  ,  Ties : ${score.ties}`)
             */
-            document.querySelector('.js-move').innerHTML = ` You <img src="imgs/${userchoice}-emoji.png"><img src="imgs/${PcMove}-emoji.png"> Computer`;
+            document.querySelector('.js-move').innerHTML = ` You <img src="${userchoice}-emoji.png"><img src="${PcMove}-emoji.png"> Computer`;
 
             }
 
